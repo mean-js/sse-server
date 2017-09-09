@@ -42,13 +42,23 @@ router.get("/sse-api", cors(), function(req, res, next) {
 
 
 // SAMPLE EVENT GENERATOR
+var max = 255;
+var min = 100;
 setInterval(function() {
     sse.scoreConnList.forEach(function(resp) {
+        var rcode = Math.floor(Math.random() * (max - min + 1)) + min;
+        var gcode = Math.floor(Math.random() * (max - min + 1)) + min;
+        var bcode = Math.floor(Math.random() * (max - min + 1)) + min;
+        var colorCode = `rgb(${rcode}, ${gcode}, ${bcode})`;
+
         let sresObj = {
             "title": "Affixus Systems System Pvt. Ltd",
             "ts": moment().toDate(),
-            "bg": { "background-color": "#abc" }
+            "bg": { "background-color": `${colorCode}`, "color": "WHITE" }
         };
+
+
+
         let sresStr = JSON.stringify(sresObj);
 
         var d = new Date();
