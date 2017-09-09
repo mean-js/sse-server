@@ -1,6 +1,8 @@
 var moment = require("moment");
 var express = require('express');
+var cors = require('cors');
 var router = express.Router();
+
 
 let sse = { "scoreConnList": [] };
 
@@ -10,16 +12,9 @@ router.get("/", function(req, res, next) {
 });
 
 
-router.get("/score", function(req, res, next) {
+router.get("/sse-api", cors(), function(req, res, next) {
     // set timeout as high as possible
     req.socket.setTimeout(Number.MAX_VALUE);
-
-    /*
-    res.setHeader('Access-Control-Allow-Methods', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', 'http://192.168.0.104:3001');
-    */
 
     res.writeHead(200, {
         'Content-Type': 'text/event-stream',
@@ -49,13 +44,17 @@ router.get("/score", function(req, res, next) {
 // SAMPLE EVENT GENERATOR
 setInterval(function() {
     sse.scoreConnList.forEach(function(resp) {
-        let sresObj = { "title": "Affixus Systems System Pvt. Ltd", "ts": moment().toDate() };
+        let sresObj = {
+            "title": "Affixus Systems System Pvt. Ltd",
+            "ts": moment().toDate(),
+            "bg": { "background-color": "#abc" }
+        };
         let sresStr = JSON.stringify(sresObj);
 
         var d = new Date();
         resp.write("data: " + sresStr + '\n\n'); // Note the extra newline
     });
-}, 3000);
+}, 5000);
 
 
 
