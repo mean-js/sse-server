@@ -1,0 +1,25 @@
+{
+  "name": "public",
+  "authors": [
+    "santosh <santosh.ece06@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-material": "^1.1.5",
+    "angular": "^1.6.6",
+    "angular-route": "^1.6.6",
+    "underscore": "^1.8.3",
+    "moment": "^2.18.1",
+    "angular-material-icons": "^0.7.1"
+  }
+}
